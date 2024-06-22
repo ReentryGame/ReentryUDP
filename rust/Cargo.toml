@@ -17,8 +17,8 @@ name = "reentryudp"
 path = "src/lib.rs"
 
 [[bin]]
-name = "reentryudp_bin"
-path = "src/bin.rs"
+name = "reentryudp_blinker"
+path = "src/blinker.rs"
 
 [dependencies]
 serde = "1.0.203"
