@@ -1,0 +1,31 @@
+{
+    "$schema": "http://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/ReentryGame/ReentryUDP/main/schema.json",
+    "title": "ReentryUDP",
+    "type": "object",
+    "properties": {
+        "TargetCraft": {
+            "type": "integer",
+            "description": "The ID of the craft that the message is intended for.",
+            "minimum": 0,
+            "maximum": 5
+        },
+        "MessageType": {
+            "type": "integer",
+            "description": "The type of message being sent.",
+            "enum": [0, 1]
+        },
+        "ID": {
+            "type": "integer",
+            "description": "The ID of the switch or button targeted.",
+            "minimum": 0
+        },
+        "ToPos": {
+            "type": "integer",
+            "description": "The position the switch or button is being moved to.",
+            "minimum": 0,
+            "maximum": 5
+        }
+    },
+    "required": ["TargetCraft", "MessageType", "ID", "ToPos"]
+}
