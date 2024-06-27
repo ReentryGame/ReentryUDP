@@ -321,7 +321,6 @@ class GeminiButtonID:
     EjectDRingCDR = 34
     EjectDRingPLT = 35
 
-
 class CommandModuleSwitchID:
     NULL = 0
     FC1MNA = 1
@@ -640,6 +639,7 @@ class CommandModuleSwitchID:
     P600EmerO2Valve = 314
     P601RepressO2Valve = 315
 
+# TODO: Add alternate spelling for AGCPluss, AGCMinus
 class CommandModuleButtonID:
     NULL = 0
     AGCVerb = 1
@@ -828,6 +828,7 @@ class LunarModuleSwitchID:
     ORDEALSlew = 142
     ORDEALLocation = 143
 
+# TODO: Add alternate spelling for LGCPlus, LGCNeg
 class LunarModuleButtonID:
     NULL = 0
     AGSButton1 = 1
