@@ -8,7 +8,7 @@ namespace ReentryUDP.DomainModels
     {
         public enum Craft { Mercury, Gemini, CommandModule, LunarModule, SpaceShuttle, Vostok }
         public Craft TargetCraft = Craft.Mercury;
-        public enum MessageTypes { SetSwitch, PushButton }
+        public enum MessageTypes { SetSwitch, PushButton, SetCircuitBreaker, SetSelector, SetHandle }
         public MessageTypes MessageType = MessageTypes.SetSwitch;
         public int ID;
         public int ToPos;
