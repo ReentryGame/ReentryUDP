@@ -8,7 +8,7 @@ pub enum Craft {
 
 #[derive(Debug, EnumIter, Deserialize, Serialize)]
 pub enum MessageType {
-    SetSwitch, PushButton
+    SetSwitch, PushButton, SetCircuitBreaker, SetSelector, SetHandle
 }
 
 #[derive(Debug, EnumIter, Deserialize, Serialize)]

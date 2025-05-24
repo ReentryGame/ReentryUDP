@@ -18,6 +18,9 @@ class Craft:
 class MessageType:
     SetSwitch = 0
     PushButton = 1
+    SetCircuitBreaker = 2
+    SetSelector = 3
+    SetHandle = 4
 
 class Position:
     NULL = 0
