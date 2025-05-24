@@ -8,7 +8,7 @@ namespace ReentryUDP.DomainModels
     {
         public enum Craft { Mercury, Gemini, CommandModule, LunarModule, SpaceShuttle, Vostok }
         public Craft TargetCraft = Craft.Mercury;
-        public enum MessageTypes { SetSwitch, PushButton }
+        public enum MessageTypes { SetSwitch, PushButton, SetCircuitBreaker, SetSelector, SetHandle }
         public MessageTypes MessageType = MessageTypes.SetSwitch;
         public int ID;
         public int ToPos;
@@ -25,6 +25,28 @@ namespace ReentryUDP.DomainModels
         AudioRetroWarn, LightsTest, AudioH2OCabin, AudioH2OSuit, AudioRetroReset,
         InletValve, Maneuver, Battery1, Battery2, Battery3, Standby1, Standby2, IsolatedBattery
     };
+
+    public enum MercuryFuseID
+    {
+        NULL, SuitFan, InvrContrl, RetroJett, RetroMan, ProGramr, BloodPress,
+        AntSwitch, ComvRcvrA, TrimHiFreq, EmerReserveDeploy, EmerLandBag, EmerRescueAids,
+        PeriScope, ASCSDot05G, EmerDot05G, EmerDrogueDeploy, EmerMainDeploy, ReserveDeploy,
+        AuxBcn, No1RetroRckt, No2RetroRckt, No3RetroRckt, EmerRetroSeq, EmerRetroJett,
+        PhaseShifter, EmerCapSepCntrl, EmerEscapeRckt, TowerSepContrl, EmerTowerSep,
+        EmerTowerJett, EmerPosgrd
+    };
+    public enum MercurySelectorID
+    {
+        NULL, DCSelector, ACSelector, RetroTimeModifier, CabinTemp, SuitTemp, InverterTemp,
+        EPIInclination, LowerWindowShield, LeftWindowShield, RightWindowShield
+    };
+    public enum MercuryHandleID
+    {
+        NULL, Decompress, Repressurize, ManualControl, RollLock, PitchLock, YawLock,
+        RingJettTower, RingSepCapsule, RingOpenSnorkelNow, RingDeployMainNow,
+        RingDeployReserveNow, EmerO2, RetractPeriscope, PressRegHandle
+    }; 
+    public enum MercuryButtonID { NULL, RetroSeq, FireRetroNow, JettRetroNow, Dot05GNow, DeployDrogueNow, TimeZero }
 
     public enum GeminiSwitchID
     {
@@ -63,6 +85,13 @@ namespace ReentryUDP.DomainModels
         Keyboard1, Keyboard2, Keyboard3, Keyboard4, Keyboard5, Keyboard6, Keyboard7, Keyboard8, Keyboard9, KeyboardZero,
         KeyboardReadOut, KeyboardClear, KeyboardEnter, ComputerReset, ComputerStart, PlatformReset, EmerRelease, DCSReceive, IMUReset,
         HiAltDrogue, Para, LdgAtt, ParaJett, EjectDRingCDR, EjectDRingPLT
+    };
+    public enum GeminiSelectorID
+    {
+        NULL, VoltMeterSelector, dPMeterSelector, CryoSelector, ACMEMode, IGSPlatform, ComputerMode, FDI1Mode, FDI1Data, FDI2Mode, FDI2Data,
+        TapeControl, Repressurize, CabinRecirc, Snorkel, CabinVent, WaterSeal, O2HighRateRecock, EventTimerTimeKnob, MissionElapsedTimeKnob,
+        PropGaugeSelector, FDI1SetKnob, FDI2SetKnob, DCDCConvATM, SecondaryO2ShutoffL, SecondaryO2ShutoffR, EncoderBit1, EncoderBit2, EncoderBit3,
+        RadioModeA, RadioModeB, DimLightControl, TempCabin, TempSuit
     };
 
     public enum CommandModuleSwitchID
@@ -105,6 +134,56 @@ namespace ReentryUDP.DomainModels
         Liftoff, NoAutoAbort, LESMotorFire, CanardDeploy, CSMLVSep, APEXCoverJett, DrogueDeploy, MainDeploy, CMRCSHeDump, GDCAlign, SPSDirectUllage, SPSThrustOn,
         EMS_Increase, EMS_Decrease, EMS_IncreaseFast, EMS_DecreaseFast, MasterCaution, Abort, P351_EmerCabinPressTest, P380_DemandRegulatorBleedPort
     };
+    public enum CommandModuleCircuitBreakerID
+    {
+        NULL, FC1Reacs, FC2Reacs, FC3Reacs, FC1BusCont, FC2BusCont, FC3BusCont, InvCtrl1, InvCtrl2, InvCtrl3, CryoH2Htr1, CryoH2Htr2, CryoO2Htr1, CryoO2Htr2,
+        CryoFan10A, CryoFan10B, CryoFan10C, CryoFan20A, CryoFan20B, CryoFan20C, O2VACIONPumpMNA, O2VACIONPumpMNB, FC1Radiator, FC2Radiator, FC3Radiator, FC1Purge, FC2Purge, FC3Purge,
+        CMCMNA, CMCMNB, IMUMNA, IMUMNB, OSSMNA, OSSMNB, GnNPWRAC1, GnNPWRAC2, SCSAC1, SCSAC2, Controller1DirectMNA, Controller1DirectMNB, Controller2DirectMNA, Controller2DirectMNB,
+        ACRollMNA, ACRollMNB, BDRollMNA, BDRollMNB, PitchMNA, PitchMNB, YawMNA, YawMNB, RCSLogicMNA, RCSLogicMNB, PrplntIsolMNA, PrplntIsolMNB, ControllerAutoMNA, ControllerAutoMNB,
+        QuadAHeaters, QuadBHeaters, QuadCHeaters, QuadDHeaters, SPSHeVlvMNA, SPSHeVlvMNB, SPSPilotVlvMNA, SPSPilotVlvMNB, DirectUllageMNA, DirectUllageMNB, TVCAC1, TVCAC2,
+        CMHtr1, CMHtr2, SeqLogic1, SeqLogic2, PyroArmA, PyroArmB, FloatBag1, FloatBag2, FloatBag3, ELSBatA, ELSBatB, CabinFan1A, CabinFan1B, CabinFan1C, CabinFan2A, CabinFan2B, CabinFan2C,
+        SecCoolLoopAC1, SecCoolLoopAC2, WasteH2OUrineDumpMNA, WasteH2OUrineHtrMNB, XducerSecCoolLoopMNA, XducerSecCoolLoopMNB, WastePotH2OMNA, WastePotH2OMNB, XducerPressGroup1MNA, XducerPressGroup1MNB,
+        XducerPressGroup2MNA, XducerPressGroup2MNB, XducerTempMNA, XducerTempMNB, PotWaterHtrMNA, PotWaterHtrMNB, WaterAccumulatorMNA, WaterAccumulatorMNB, EPSSensorDCMNA, EPSSensorDCMNB,
+        EPSSensorAC1, EPSSensorAC2, CnWSDCMNA, CnWSDCMNB, EPSSensorUnitDCMNA, EPSSensorUnitDCMNB, EPSSensorUnitAC1, EPSSensorUnitAC2, BatteryRelayBus_BatA, BatteryRelayBus_BatB,
+        BatteryChargerMainAC, BatteryChargerMNA, BatteryChargerMNB, BatteryChargeA, BatteryChargeB, RadiatorControllerAC1, RadiatorControllerAC2, RadiatorControllerHtrMNA, RadiatorControllerHtrMNB,
+        RadiatorHtrsOvldBatA, RadiatorHtrsOvldBatB, SCSSystemMNA, SCSSystemMNB, SCSLogic12MNA, SCSLogic12MNB, SCSLogic34MNA, SCSLogic34MNB, EMSMNA, EMSMNB, DockProbeMNA, DockProbeMNB,
+        MainABatBusA, MainABatC, MainBBatC, MainBBatBusB, FlgtPstLndBatBusA, FlgtPstLndBatBusB, FlgtPstLndBatC, FlgtPstLndMainA, FlgtPstLndMainB, InvPwr1MainA, InvPwr2MainB, InvPwr3MainA, InvPwr3MainB,
+        PyroA_BatBusAToPyroBusTie, PyroA_SeqA, PyroB_BatBusBToPyroBusTie, PyroB_SeqB, BatAPwrEntPstLnd, BatBPwrEntPstLnd, BatCPwrEntPstLnd, BatCToBatBusA, BatCToBatBusB, BatCBatChargerEDS2,
+        InstPwrCntrlCB1, InstPwrCntrlCB2, InstPwrCntrlCB3, InstPwrCntrlCB4, UprightSystem1, UprightSystem2, SIVLMSepPyroA, SIVLMSepPyroB, PrimaryGlycolToRadiators, PLVentFLTPL,
+        EDSBatA, EDSBatB, EDSBatC, ORDEALAC2, ORDEALMNB, LM_PWR_1_MNA, LM_PWR_2_MNB,
+        P225_CommPCM_TLM_Group1, P225_CommPCM_TLM_Group2, P225_FlightBusMNA, P225_FlightBusMNB, P225_PMPPowerFLTBUSPrim, P225_PMPPowerFLTBUSAux, P225_SBandFMXMTR_DataStorageEquipGroup1,
+        P225_SBandFMXMTR_DataStorageEquipFltBus, P225_HighGainAnt_Group2, P225_HighGainAnt_FltBus, P225_UDLFltBus, P225_VHFCrewStationAudio_FltPostLdgBus_L,
+        P225_VHFCrewStationAudio_FltPostLdgBus_CTR, P225_VHFCrewStationAudio_FltPostLdgBus_R, P225_SBandPwrAmplPhaseMDOXpndr2Group2, P225_SBandPwrAmplPhaseMDOXpndr2FltBus,
+        P225_SBandPwrAmplPhaseMDOXpndr1Group1, P225_SBandPwrAmplPhaseMDOXpndr1FltBus, P225_CentralTimingEquip_MNA, P225_CentralTimingEquip_MNB, P225_RndzXpndrFltBus,
+        P225_SigCondrFltBus, P226_ACPumpFC1, P226_ACPumpFC2, P226_ACPumpFC3, P226_FuseQtyAmpl1_AC1, P226_FuseQtyAmpl2_AC2,
+        P226_LightningCoasTunnelRndzSpotMNA, P226_LightningCoasTunnelRndzSpotMNB, P226_LightNumIntgMDCAC1R, P226_LightNumIntgMDCAC1L,
+        P226_LightNumIntgLEBAC2, P226_LightFloodFltPl, P226_LightFloodMNB, P226_LightFloodMNA, P226_LightRunEvaTrgtAC1, P226_LightRunEvaTrgtAC2,
+        P229_SPSLineHtrsMNA, P229_SPSLineHtrsMNB, P229_TimersMNA, P229_TimersMNB, P229_EPSGroup2MNA, P229_EPSGroup1MNA, P229_EPSGroup2MNB, P229_EPSGroup1MNB,
+        P229_EPSGroup4MNA, P229_EPSGroup3MNA, P229_EPSGroup4MNB, P229_EPSGroup3MNB, P229_MainReleasePyroA, P229_MainReleasePyroB, P229_EPSGroup5MNA,
+        P229_EPSGroup5MNB, P229_EPSUtilityRLSTA, P229_EPSUtilityLEB, P229_EPSBatBusB, P229_EPSBatBusA, P380_SuitCurcuitReturnValve,
+        P4_SuitCompAC1A, P4_SuitCompAC1B, P4_SuitCompAC1C, P4_SuitCompAC2A, P4_SuitCompAC2B, P4_SuitCompAC2C,
+        P4_ECSGlycolPumpAC1A, P4_ECSGlycolPumpAC1B, P4_ECSGlycolPumpAC1C, P4_ECSGlycolPumpAC2A, P4_ECSGlycolPumpAC2B, P4_ECSGlycolPumpAC2C,
+        P5_SecCoolLoopRadHtrMNA, P5_GN_ImuHtr_MNA, P5_GN_ImuHtr_MNB,
+        P8_SPS_GaugingMNA, P8_SPS_GaugingMNB, P8_SPS_GaugingAC1, P8_SPS_GaugingAC2, P8_SPS_Pitch1BatA, P8_SPS_Pitch2BatB, P8_SPS_Yaw1BatA, P8_SPS_Yaw2BatB,
+        P5_Inst_EssMNA, P5_Inst_EssMNB, P5_Inst_NonEss, P5_Inst_SCI1, P5_Inst_SCI2, P5_Inst_SCIHatch
+    };
+    public enum CommandModuleSelectorID
+    {
+        NULL, FCTestSelector, DCIndicatorSelector, ACIndicatorSelector, FDAIPowerSelector, SCSElectronicsPWR, RCSIndicatorSelector, IntegralLeft, IntegralCenter, IntegralRight,
+        FloodLeft, FloodInside, FloodRight, BMAGPWR1, BMAGPWR2, EMSSelector, PrimaryRCSGlycolPumps, ChargeBatterySelector, ECSIndicatorSelector, HighGainPitch, HighGainYaw,
+        WheelSqA, WheelSqB, WheelCabinTemp, SPSGimbalTrimPitch, SPSGimbalTrimYaw, VHFAntennaSelector, LM_CM_PSI_DiffSelector, CM_LM_DoorHatch, P377_GlyToRadSec, P7_DirectO2,
+        P378_PrimGlycolAccum, P379_PrimAccumFill, P382_SuitHtExchPrimaryGlycol, P382_SuitFlow, P382_PrimaryGlycolEvapInletTemperature, P382_SuitHtExchSecondaryGlycol,
+        P382_EvapWaterControlPrimary, P382_EvapWaterControlSecondary, P382_WaterAccumulator1, P382_WaterAccumulator2,
+        P351_MNRegulatorA, P351_MNRegulatorB, P351_Regulator, P351_Relief, P351_EmerCabinPSI, P351_CabinRepress,
+        P352_WasteTank, P352_PotableTank, P352_WasteTankInlet, P352_PressureRelief, P303_PrimaryCabinTemp, P303_SecondaryCabinTemp, P304_DrinkingWaterSupply,
+        P100_Numerics, P101_SysTest1, P101_SysTest2, P375_OxygenSurgeVlv, P380_DemandReg, P380_O2DemandReg, P325_CabinPressureRelief1, P325_CabinPressureRelief2,
+        P326_GlycolReservoir_Inlet, P326_GlycolReservoir_Bypass, P326_GlycolReservoir_Outlet,
+        P326_OxygenRepressPkg, P326_OxygenSMSupply, P326_OxygenSurgeTank, P251_WasteMngtOvdbDump, P252_BatteryVent, P252_WasteStowageVent,
+        P8_Numerics, P350_CO2CannisterA, P350_CO2CannisterB, SideHatch_VentValve
+    };
+
+
+
     public enum LunarModuleSwitchID
     {
         NULL, P14_EDVolts, P14_Inverter, P14_DescentBat1LMPHiV, P14_DescentBat1LMPLoV, P14_DescentBat2LMP, P14_DescentBat3CDR, P14_DescentBat4CDRHiV, P14_DescentBat4CDRLoV, P14_DescentBatLunarCDR, P14_DescentBatLunarLMP,
@@ -131,5 +210,44 @@ namespace ReentryUDP.DomainModels
         LGCVerb, LGCNoun, LGCPlus, LGCNeg, LGC0, LGC1, LGC2, LGC3, LGC4, LGC5, LGC6, LGC7, LGC8, LGC9, LGCClr, LGCPro, LGCKeyRel, LGCEntr, LGCRset,
         P05_Transl, P01_Abort, P01_AbortStage, AGSButton0, AGSButton2, AGSButton3, AGSButton4, AGSButton5, AGSButton6, AGSButton7, AGSButton8, AGSButton9, AGSButtonHold, AGSButtonCLR, AGSButtonReadOut, AGSButtonEntr, AGSButtonPos, AGSButtonNeg
     };
+    public enum LunarModuleCircuitBreakerID
+    {
+        NULL, P16_BatFeedTieA, P16_BatFeedTieB, P16_CrossTieBalLoad, P16_CrossTieBus, P16_XLunarBusTie, P16_DesECACont, P16_DesECA, P16_AscECACont, P16_AscECA, P16_Inv2, P16_DCBusVolt, P16_Disp,
+        P11_ACBusBBusTieInv1, P11_ACBusBBusTieInv2, P11_ACBusABusTieInv1, P11_ACBusABusTieInv2, P11_ACBusAACBusVolt,
+        P11_BatFeedTieA, P11_BatFeedTieB, P11_CrossTieBalLoad, P11_CrossTieBus, P11_XLunarBusTie, P11_DesECACont, P11_DesECA, P11_AscECACont, P11_AscECA, P11_Inv1, P11_DCBusVolt,
+        P16_Heaters_RCSAB2_Q1, P16_Heaters_RCSAB2_Q2, P16_Heaters_RCSAB2_Q3, P16_Heaters_RCSAB2_Q4, P16_Camr_Seq, P16_Heaters_SBandAnt, P16_Heaters_Disp,
+        P16_Propul_ASCHe_Reg, P16_Propul_PQGS, P16_Propul_Disp, P16_RCSSysB_MainSov, P16_RCSSysB_PQGSDisp, P16_RCSSysB_TempPressDispFlags, P16_RCSSysB_Crossfeed,
+        P16_RCSSysB_Q4, P16_RCSSysB_Q3, P16_RCSSysB_Q2, P16_RCSSysB_Q1, P16_RCSSysB_IsolVlv, P16_RCSSysB_ASCFeed2, P16_RCSSysB_ASCFeed1,
+        P16_FltDisp_LMP_XPntr, P16_FltDisp_LMPFDAIAndEventTimer, P16_LTG_Flood, P16_LTG_Track, P16_LTG_AnunDockCompnt, P16_LTG_MasterAlarm, P16_ED_LogicPwrB,
+        P16_StabCont_AEA, P16_StabCont_EngArm, P16_StabCont_ASA, P16_StabCont_AELD, P16_StabCont_ATCA, P16_StabCont_AbortStage, P16_StabCont_ATCA_AGS, P16_StabCont_DesEngOvrd,
+        P16_Inst_CWEA, P16_Inst_SigSensor, P16_Inst_PCMTE, P16_Inst_SigCondr2, P16_ECS_SuitFlowCont, P16_ECS_CO2_Sensor, P16_ECS_DivertVlv, P16_ECS_CabinRepress, P16_ECS_CabinFanCont,
+        P16_ECS_LCGPump, P16_ECS_GlycolPumpSec, P16_ECS_Disp, P16_SuitFan_dP, P16_ECS_SuitFan2,
+        P16_Comm_TV, P16_Comm_PMP, P16_Comm_SBandAnt, P16_Comm_PrimSBand_XMTR_RCVR, P16_Comm_PrimSBand_PWPAmppl, P16_Comm_VHFB_RCVR, P16_Comm_VHFA_XMTR, P16_Comm_LMP_Audio, P16_Comm_Disp,
+        P11_ACBusB_LMPWindHtr, P11_ACBusB_HePQGS_PropDisp, P11_ACBusB_SBandAnt, P11_ACBusB_Ordeal, P11_ACBusB_AGS, P11_ACBusB_LMPFDAI, P11_ACBusB_NumLtg, P11_ACBusB_AOTLMP,
+        P11_ACBusA_CDRWindHtr, P11_ACBusA_TapeRcdr, P11_ACBusA_AOTLAMP, P11_ACBusA_RNDZRdr, P11_ACBusA_DecaGmbl, P11_ACBusA_IntglLtg, P11_ACBusA_CDRFDAI, P11_ACBusA_GASTA, P11_ACBusA_RngRtAltRt,
+        P11_FlightDisplays_Ordeal, P11_FlightDisplays_COAS, P11_FlightDisplays_CDRFDAI, P11_FlightDisplays_GASTA, P11_FlightDisplays_RngRtAltRt, P11_FlightDisplays_CNDRXPntr,
+        P11_FlightDisplays_MissionTimer, P11_FlightDisplays_Thrust,
+        P11_RCSSysA_ASCFeed1, P11_RCSSysA_ASCFeed2, P11_RCSSysA_ISOLVlv, P11_RCSSysA_Q1TCA, P11_RCSSysA_Q2TCA, P11_RCSSysA_Q3TCA, P11_RCSSysA_Q4TCA, P11_RCSSysA_MainSov,
+        P11_Prop_DESHeRegVent, P11_Heaters_RndzRdr_STB, P11_Heaters_RndzRdrOpr, P11_Heaters_LdgRdr, P11_Heaters_DockWindow, P11_Heaters_AOT, P11_Inst_SigCondr1,
+        P11_StabCont_AEA, P11_StabCont_AbortStage, P11_StabCont_ATCA_PGNS, P11_StabCont_AELD, P11_StabCont_EngCont, P11_StabCont_AttDirCont, P11_StabCont_EngStartOvrd,
+        P11_StabCont_DecaPWR, P11_ED_LdgGearFlag, P11_ED_LogicPWRA, P11_LTG_Util, P11_LTG_AnunDockCompnt,
+        P11_PGNS_IMU_OPR, P11_PGNS_IMU_STBY, P11_PGNS_LGC_DSKY, P11_PGNS_RndzRdr, P11_PGNS_LdgRdr, P11_PGNS_SigStrDisp, P11_COMM_CDRAudio, P11_COMM_VHFARcvr, P11_COMM_VHFBXMTR,
+        P11_COMM_SecSBand_PWRAmpl, P11_COMM_SecSBand_XMTR_RCVR, P11_COMM_UpDataLink,
+        P11_ECS_GlycolPump_AutoTrnsfr, P11_ECS_GlycolPump_1, P11_ECS_GlycolPump_2, P11_ECS_CabinFan1, P11_ECS_SuitFan1, P11_Heaters_Q1, P11_Heaters_Q2, P11_Heaters_Q3, P11_Heaters_Q4,
+        ECS_SuitGasDiverter, ECS_WaterSepSel
+    };
+    public enum LunarModuleSelectorID
+    {
+        NULL, P14_EPSPowerTempMon, P02_TempPressMon, P03_TempMonitor, P01_HeliumMon, P03_TestMonitor, P03_RndzRadar_Tracker, P03_LampToneTest, P03_FloodLightDimmer,
+        P02_Glycol, P02_SuitFan, P02_O2_H2O_Qty_Mon, P05_FloodOvhdFwd, P05_AnunNum, P05_Integral, P12_Pitch, P12_Yaw, P12_SBand, P12_VHF,
+        ECS_CabinRepress, ECS_PLSS_Fill, ECS_PressRegA, ECS_PressRegB, ECS_O2_Des, ECS_O2_Asc1, ECS_O2_Asc2, ECS_SuitIsol_CDR, ECS_SuitIsol_LMP, ECS_SecEvapFlow, ECS_PriEvapFlowNo2, ECS_DesH2O, ECS_PriEvapFlowNo1, ECS_SuitTemp, ECS_ASC_H2O,
+        ECS_LiquidGarmentCooling, ECS_SuitCircuitRelief, ECS_CabinGasReturn, ECS_WaterTankSelector, TTCAThrottleJets, ForwardHatch_CabinReliefVentValve, OverheadHatch_CabinReliefVentValve, ECS_CO2CanisterSelect
+    };
+
+
+
+
+
     public enum PinPosition { NULL, Left, Middle, Right, Up, Down };
+    public enum CircuitBreakerPosition { NULL, Open, Closed }
 }
